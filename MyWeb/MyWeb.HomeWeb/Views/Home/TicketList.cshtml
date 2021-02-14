@@ -1,0 +1,322 @@
+﻿@model List<TicketModel>;
+@{
+    int ticket_id = 0;
+    string title = "";
+    if (Model?.Count > 0)
+    {
+        ticket_id = Model[0].Ticket_Id;
+        title = Model[0].Title;
+    }
+    //이런 방법은 기존 asp나 asp.net 웹폼 사용자에겐 매우 익숙하다.
+    //하지만 우리가 할건 MVC이다.
+
+    //var dt = ViewData["dt"] as System.Data.DataTable;
+    //int ticket_id = 0;
+    //string title = "";
+    //if (dt.Rows.Count > 0)
+    //{
+    //    //형변환이 안되면 널이뜨고 형변환이 안돼서 널이뜨면 자동으로 0이 된다.
+    //    //ticket_id = (dt.Rows[0]["ticket_id"] as int?).GetValueOrDefault(0);
+
+    //    // 강제로 형변환 시키기. 데이터 값이 없으면 오류가 뜨지요.
+    //    ticket_id = Convert.ToInt32(dt.Rows[0]["ticket_id"]);
+
+    //    //널값이 넘어오면 에러가 뜬다.
+    //    //title = dt.Rows[0]["title"].ToString();
+    //    title = dt.Rows[0]["title"] as string;
+
+    //}
+
+    //var ticketList = ViewData["ticketList"] as List<TicketModel>;
+    //int ticket_id = 0;
+    //string title = "";
+    //if (ticketList.Count>0)
+    //{
+    //    ticket_id = ticketList[0].Ticket_Id;
+    //    title = ticketList[0].Title;
+    //    string status = ticketList[0].Status;
+    //}
+
+}
+<!--Axios CDN-->
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+@*
+    axios에 대해서 더 자세한 설명은 아래링크를 확인
+    https://blog.naver.com/windfalcon1/221585676850*@
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <!-- Column -->
+                    <div class="col-md-6 col-lg-3 col-xlg-3">
+                        <div class="card card-hover">
+                            <div class="p-2 bg-primary text-center">
+                                <h1 class="font-light text-white">2,064</h1>
+                                <h6 class="text-white">Total Tickets</h6>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Column -->
+                    <div class="col-md-6 col-lg-3 col-xlg-3">
+                        <div class="card card-hover">
+                            <div class="p-2 bg-cyan text-center">
+                                <h1 class="font-light text-white">1,738</h1>
+                                <h6 class="text-white">Responded</h6>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Column -->
+                    <div class="col-md-6 col-lg-3 col-xlg-3">
+                        <div class="card card-hover">
+                            <div class="p-2 bg-success text-center">
+                                <h1 class="font-light text-white">1100</h1>
+                                <h6 class="text-white">Resolve</h6>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Column -->
+                    <div class="col-md-6 col-lg-3 col-xlg-3">
+                        <div class="card card-hover">
+                            <div class="p-2 bg-danger text-center">
+                                <h1 class="font-light text-white">964</h1>
+                                <h6 class="text-white">Pending</h6>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Column -->
+                </div>
+                <div class="table-responsive">
+                    <table id="zero_config" class="table table-striped table-bordered no-wrap">
+                        <thead>
+                            <tr>
+                                <th>Status</th>
+                                <th>Title</th>
+                                <th>ID</th>
+                                <th>Product</th>
+                                <th>Created by</th>
+                                <th>Date</th>
+                                <th>Agent</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @*@foreach (System.Data.DataRow row in dt.Rows)
+                                {
+                                <tr>
+                                    <td>@row["status"]</td>
+                                    <td>@row["title"]</td>
+                                    <td>@row["ticket_id"]</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                }*@
+
+                            @*@foreach (var ticket in ticketList)*@
+                            @foreach (var ticket in Model)
+                            {
+                                <tr>
+                                    <td>@ticket.Status</td>
+                                    <td>@ticket.Title</td>
+                                    <td>@ticket.Ticket_Id</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                            }
+
+                        </tbody>
+                    </table>
+
+                    @*<ul class="pagination float-right">
+                            <li class="page-item disabled">
+                                <a class="page-link" href="#" tabindex="-1">Previous</a>
+                            </li>
+                            <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                            <li class="page-item">
+                                <a class="page-link" href="#">2 <span class="sr-only">(current)</span></a>
+                            </li>
+                            <li class="page-item"><a class="page-link" href="#">3</a></li>
+                            <li class="page-item">
+                                <a class="page-link" href="#">Next</a>
+                            </li>
+                        </ul>*@
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div>
+    @*아래 부분을 ajax로 변경해보자.*@
+    @*<form id="form1" method="post" action="/home/TicketChange">
+            <input name="ticket_id" type="text" value="@ticket_id" />
+            <input name="title" type="text" value="@title" />
+            <button type="submit" class="btn btn-sm btn-primary">변경 전송</button>
+        </form>*@
+
+    <div>
+        <input id="ticket_id" type="text" value="@ticket_id" />
+        <input id="title" type="text" value="@title" />
+        <button id="btn1" type="button" class="btn btn-sm btn-primary">변경 전송</button>
+    </div>
+
+    @*WebApi를 위해 생성해봄*@
+    <div>
+        <button id="btn2" type="button" class="btn btn-sm btn-primary">WebApi Test</button>
+    </div>
+    @*WebApi를 위해 생성해봄*@
+    <script>
+        $("#btn1").click(function () {
+            var ticket_id = $("#ticket_id").val();
+            var title = $("#title").val();
+
+            /*
+            //1. 순수 js (바닐라js)
+            var xhr = new XMLHttpRequest();
+             //async: 동기로 할지 비동기로 할지
+            xhr.open("post", "/home/TicketChange", true);
+            //헤더도 잡아주자.
+            xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState == 4) {
+                    if (xhr.status == 200) {
+                        alert("저장 성공");
+                        location.reload();
+
+                    }
+                }
+                //전송 끝나면 동작할 작업
+            }
+
+            //데이터
+            xhr.send("ticket_id=" + ticket_id + "&title=" + decodeURIComponent(title));
+            // 1.순수 js 끝
+            */
+
+            //2. jquery ajax 이용
+            //ajax안의 data는 아래 선언된 var data와 동일한 역할을 한다.
+            //var data = {};
+            //data["ticket_id"] = ticket_id;
+            //$.ajax({
+            //    type: "POST",
+            //    url: "/home/TicketChange",
+            //    dataType: "json", //일반적으론 json으로 받는데 html로도 받을 수 있다. Json으로 반환하려 했는데 오류가 나네.. 컨트롤러에서 TicketChange함수가 redirect 시켜서 html을 던저주기때문이다.
+            //    data:
+            //    {
+            //        //첫번째 방법은 티켓아이디와 타이틀에 데이터를 직접적으로 넣는 방법이 있다.
+            //        "ticket_id": ticket_id
+            //        , "title": title
+
+            //        //// 두번째 방법은 모델 자체에 데이터 넣어보자.
+            //        //model: {
+            //        //    "ticket_id": ticket_id
+            //        //    , "title": title
+            //        //},
+            //        //num : 1234
+            //    },
+            //    success: function (data) {
+            //        alert(data.msg);
+            //        location.reload();
+            //    },
+            //    error: function (xhr) {
+            //        console.log(xhr);
+
+            //    }
+            //});
+
+            //2. jquery ajax 이용
+
+            /*
+          // 3. 엑시오스
+          // 최근(20.12.04기준)에 조금 더 추천되는 방법이다.
+          axios.post("/home/TicketChange", {
+              //json규약이 깐깐하여 값이 0일지라도 Number로 형변환을 해줘야 한다.
+              //안 하면 에러.
+              // 그걸 막기위해서 startup쪽에 작업을 진행하자.
+              // 진행후 데이터를 확인해보면 int 값이 들어가는걸 볼 수 있다.
+              "ticket_id": ticket_id
+                  , "title": title
+
+          }).then(function (response) {
+              //alert(response.data.msg);
+
+              //카멜케이스가 무조건 적용되어 프로퍼티를 대문자로 생성해도 첫번째 문자는 소문자로 읽어와야한다.
+              //하지만 startup옵션에서 강제로 카멜케이스를 끌 수 있다.
+              //alert(response.data.title);
+              alert(response.data.Title);
+              location.reload();
+          }).catch(function (xhr) {
+              alert(xhr.responseText);
+          });
+          */
+        });
+
+        $("#btn2").click(function () {
+
+            //GET부터 테스트 진행해보자.
+            //테스트를 진행하면 에러가 뜬다.(대충 Cors 정책에 맞지 않는다.)
+            //Access to XMLHttpRequest at 'https://localhost:44385/weatherforecast' from origin 'https://localhost:5001' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource
+
+
+            $.ajax({
+                type: "get",
+                url: "https://localhost:44385/weatherforecast",
+                dataType: "json", //일반적으론 json으로 받는데 html로도 받을 수 있다. Json으로 반환하려 했는데 오류가 나네.. 컨트롤러에서 TicketChange함수가 redirect 시켜서 html을 던저주기때문이다.
+                data:{
+                },
+                success: function (data) {
+                    console.log("성공");
+                    console.log(data);
+                },
+                error: function (xhr) {
+                    console.log("실패");
+                    console.log(xhr.responseJson.message);
+
+                }
+            });
+
+
+            //Post테스트
+            //$.ajax({
+            //    type: "post",
+            //    url: "https://localhost:44385/weatherforecast",
+            //    dataType: "json", //일반적으론 json으로 받는데 html로도 받을 수 있다. Json으로 반환하려 했는데 오류가 나네.. 컨트롤러에서 TicketChange함수가 redirect 시켜서 html을 던저주기때문이다.
+            //    data: {
+            //    },
+            //    success: function (data) {
+            //        console.log("성공");
+            //        console.log(data);
+            //    },
+            //    error: function (xhr) {
+            //        console.log("실패");
+            //        console.log(xhr.responseJson.message);
+
+            //    }
+            //});
+
+            ////delete
+            //$.ajax({
+            //    type: "delete",
+            //    url: "https://localhost:44385/weatherforecast",
+            //    dataType: "json", //일반적으론 json으로 받는데 html로도 받을 수 있다. Json으로 반환하려 했는데 오류가 나네.. 컨트롤러에서 TicketChange함수가 redirect 시켜서 html을 던저주기때문이다.
+            //    data: {
+            //    },
+            //    success: function (data) {
+            //        console.log("성공");
+            //        console.log(data);
+            //    },
+            //    error: function (xhr) {
+            //        console.log("실패");
+            //        console.log(xhr.responseJson.message);
+
+            //    }
+            //});
+
+
+        
+        });
+
+    </script>
+</div>

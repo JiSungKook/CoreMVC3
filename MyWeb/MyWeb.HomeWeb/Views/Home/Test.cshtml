@@ -1,0 +1,50 @@
+﻿마리아 DB 다운로드 : https://mariadb.com/downloads/#mariadb_platform
+마리아 DB 접속 툴 : https://www.heidisql.com/download.php?download=portable-64
+
+
+1.WebApi
+* : Rest API라고도 한다.
+* : RestApi에 대한 설명 : https://meetup.toast.com/posts/92
+
+1.1 ASP.NET Core 프로젝트를 하나생성하자.
+1.2 API로 프로젝트를 생성하자.
+
+* MyWeb.HomeApi를 하나 만들어봤다.
+
+CRUD 만들어본다.
+//일반적으로 생각했을때 CRUD를 생각하는데 Rest 기준으로 CRUD를 생각해보면
+// : HttpPost (Insert)
+// : HttpGet (Read)
+// : HttpPut (Update)
+// : HttpDelete (Delete)
+
+내장 IIS로 실행을해보면 포트가 나오죠
+
+ex)https://localhost:44385/
+
+포스트맨을 사용해서 테스트 해도 되지만
+기존에 만들었던프로젝트에서 사용해보자.
+
+
+MyWeb.HomeWeb 프로젝트에 만들어봤다.
+/Views/Home/TicketList.cshtml에 만들어봄
+
+Access to XMLHttpRequest at 'https://localhost:44385/weatherforecast' from origin 'https://localhost:5001' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource
+
+CORS가 맞지 않다는 에러가 남
+Cors를 허용해주자.
+
+
+2. CORS
+
+1. 기존 사이트에서 요청 후 오류 확인
+2. Startup.cs 의 Cors 설정
+3. 기존 사이트에서 요청
+
+Cross Origin Resource Sharing : https://developer.mozilla.org/ko/docs/Web/HTTP/CORS
+
+
+
+3. 콘솔을 만들어 테스트 해보자.
+내가 콘솔로 할일은 없지만 경험삼아 해봄
+콘솔에서도 api를 호출할수 있다는 뜻이니까.

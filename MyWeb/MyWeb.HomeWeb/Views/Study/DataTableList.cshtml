@@ -1,0 +1,13 @@
+﻿@{
+    var dt = ViewData["dt"] as System.Data.DataTable;
+}
+
+<table>
+    @foreach (System.Data.DataRow row in dt.Rows)
+    {
+        <tr>
+            <td>@row["UserId"]</td>
+            <td>@row["UserNm"]</td>
+        </tr>
+    }
+</table>

@@ -1,0 +1,22 @@
+﻿@using MyWeb.HomeWeb.Models.Member
+@*@model List<MemberModel>;*@
+@{
+    var MemberList = ViewData["MemberList"] as List<MemberModel>;
+
+}
+@foreach (var Member in MemberList)
+{
+
+    @Member.UserId
+    <br />
+    @Member.UserNm
+}
+
+@{
+    if (Model?.Count > 0)
+    {
+
+    }
+
+}
+

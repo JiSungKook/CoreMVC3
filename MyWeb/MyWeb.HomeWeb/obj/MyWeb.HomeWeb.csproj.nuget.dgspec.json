@@ -1,0 +1,156 @@
+{
+  "format": 1,
+  "restore": {
+    "E:\\www\\WebMVCCore3\\MyWeb\\MyWeb.HomeWeb\\MyWeb.HomeWeb.csproj": {}
+  },
+  "projects": {
+    "E:\\www\\WebMVCCore3\\MyWeb\\MyWeb.HomeWeb\\MyWeb.HomeWeb.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "E:\\www\\WebMVCCore3\\MyWeb\\MyWeb.HomeWeb\\MyWeb.HomeWeb.csproj",
+        "projectName": "MyWeb.HomeWeb",
+        "projectPath": "E:\\www\\WebMVCCore3\\MyWeb\\MyWeb.HomeWeb\\MyWeb.HomeWeb.csproj",
+        "packagesPath": "C:\\Users\\jisun\\.nuget\\packages\\",
+        "outputPath": "E:\\www\\WebMVCCore3\\MyWeb\\MyWeb.HomeWeb\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\jisun\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp3.1"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp3.1": {
+            "targetAlias": "netcoreapp3.1",
+            "projectReferences": {
+              "E:\\www\\WebMVCCore3\\MyWeb\\MyWeb.Lib\\MyWeb.Lib.csproj": {
+                "projectPath": "E:\\www\\WebMVCCore3\\MyWeb\\MyWeb.Lib\\MyWeb.Lib.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp3.1": {
+          "targetAlias": "netcoreapp3.1",
+          "dependencies": {
+            "Dapper": {
+              "target": "Package",
+              "version": "[2.0.78, )"
+            },
+            "Microsoft.AspNetCore.Mvc.NewtonsoftJson": {
+              "target": "Package",
+              "version": "[3.1.6, )"
+            },
+            "Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation": {
+              "target": "Package",
+              "version": "[3.1.8, )"
+            },
+            "MySqlConnector": {
+              "target": "Package",
+              "version": "[1.1.0, )"
+            },
+            "System.Data.SqlClient": {
+              "target": "Package",
+              "version": "[4.8.2, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.AspNetCore.App": {
+              "privateAssets": "none"
+            },
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.102\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "E:\\www\\WebMVCCore3\\MyWeb\\MyWeb.Lib\\MyWeb.Lib.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "E:\\www\\WebMVCCore3\\MyWeb\\MyWeb.Lib\\MyWeb.Lib.csproj",
+        "projectName": "MyWeb.Lib",
+        "projectPath": "E:\\www\\WebMVCCore3\\MyWeb\\MyWeb.Lib\\MyWeb.Lib.csproj",
+        "packagesPath": "C:\\Users\\jisun\\.nuget\\packages\\",
+        "outputPath": "E:\\www\\WebMVCCore3\\MyWeb\\MyWeb.Lib\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\jisun\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netstandard2.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netstandard2.0": {
+            "targetAlias": "netstandard2.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netstandard2.0": {
+          "targetAlias": "netstandard2.0",
+          "dependencies": {
+            "Dapper": {
+              "target": "Package",
+              "version": "[2.0.78, )"
+            },
+            "MySqlConnector": {
+              "target": "Package",
+              "version": "[1.1.0, )"
+            },
+            "NETStandard.Library": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[2.0.3, )",
+              "autoReferenced": true
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.102\\RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}

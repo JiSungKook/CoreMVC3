@@ -1,0 +1,69 @@
+﻿@using System.Security.Claims
+@model BoardModel
+
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered no-wrap">
+                        <colgroup>
+                            <col style="width:100px" />
+                            <col style="width:auto" />
+                        </colgroup>
+                        <tbody>
+                            <tr>
+                                <th>제목</th>
+                                <td>@Model.Title</td>
+                            </tr>
+                            <tr>
+                                <th>내용</th>
+                                <td>
+                                    @*골뱅이를 눌러 레이져로 찍게되면 html이 무조건 인코딩 되어 나온다
+                                    왜냐하면 xss공격 즉 스크립트나 악의적인 내용들을 강제로 게시판에 넣고 공격을 할 수 있게끔 하는걸 방어하기위해 무조건 인코딩이 되어 나온다.
+                                    @Model.Contents  
+                                    그러한 인코딩을 무시하고 내용을 보여주려면 아래와 같이 쓰면 된다.
+                                        그리고 스크립트 등등의 태그들은 insert 할때 검사하도록 하자.
+                                    *@
+                                    @Html.Raw(@Model.Contents)
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>작성자</th>
+                                <td>@Model.Reg_Username (@Model.Reg_Date.ToString("yyyy-MM-dd"))</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+                <div class="text-right">
+                    @if (Model.Reg_User == Convert.ToUInt32(User.FindFirstValue(ClaimTypes.NameIdentifier))) {
+                 <button id="btnU" class="btn btn-sm btn-primary">수정</button>
+                    <button id="btnD" class="btn btn-sm btn-danger">삭제</button>
+                    //보통은 ajax통해 처리하지만 form을 이용해서 처리해보자.(나중에 바꺼야지)
+                <form id="form1" method="post" action="/home/boardEdit">
+                    <input type="hidden" name="idx" value="@Model.Idx" />
+                    <input type="hidden" name="type" value="" />
+
+                </form>
+                    <script>
+                        $("#btnU").click(function () {
+                            $("#form1 input[name=type]").val("U");
+                            $("#form1").submit();
+                        });
+
+                        $("#btnD").click(function () {
+                            $("#form1 input[name=type]").val("D");
+                            $("#form1").submit();
+                        });
+
+                    </script>
+                    }
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
